@@ -41,6 +41,14 @@ module Enumerable
     end
     !track_negative.positive?
   end
+
+  def my_any
+    yes = 0
+    my_each do |y|
+      yield(y) == true ? yes += 1 : false
+    end
+    yes.positive?
+  end
 end
 
 # p 'When an array is iterated with my_each'
@@ -73,10 +81,16 @@ end
 #   p req.odd?
 # end
 
-test_arr2 = [2, nil, 6, 8]
+# test_arr2 = [2, nil, 6, 8]
 
-puts '<<<< Testing my_all >>>>'
-# p test_arr2.my_all { |elem| elem.class == Integer }
-test_arr2.my_all do |x|
-  p x.class == Integer
+# puts '<<<< Testing my_all >>>>'
+# # p test_arr2.my_all { |elem| elem.class == Integer }
+# test_arr2.my_all do |x|
+#   p x.class == Integer
+# end
+
+puts '<<<< Testing my_any >>>>'
+# p %w[ant bear ca].my_any? { |word| word.length <= 2 }
+%w[ant bear ca].my_any do |ds|
+  p ds.length <= 2
 end
