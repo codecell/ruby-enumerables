@@ -81,7 +81,7 @@ end
 #   p req.odd?
 # end
 
-test_arr2 = [2, nil, 6, 8]
+# test_arr2 = [2, nil, 6, 8]
 
 # puts '<<<< Testing my_all >>>>'
 # # p test_arr2.my_all { |elem| elem.class == Integer }
@@ -90,7 +90,7 @@ test_arr2 = [2, nil, 6, 8]
 # end
 
 puts '<<<< Testing my_any >>>>'
-p %w[ant bear ca].any? { |word| word.length <= 2 }
-
-
-
+# p %w[ant bear ca].my_any? { |word| word.length <= 2 }
+%w[ant bear ca].my_any do |ds|
+  p ds.length <= 2
+end
