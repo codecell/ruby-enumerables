@@ -33,6 +33,14 @@ module Enumerable
     end
     required
   end
+
+  def my_all
+    track_negative = 0
+    my_each do |t|
+      yield(t) == true ? true : track_negative += 1 
+    end
+    track_negative > 0 ? false : true
+  end
 end
 
 # p 'When an array is iterated with my_each'
@@ -40,27 +48,33 @@ end
 #   p x
 # end
 
-# puts '<<< >>>>'
+# puts '<<<< >>>>'
 
 # p 'When a Range is iterated with my_each'
 # (1..4).my_each do |x|
 #   p x
 # end
 
-# puts '<<< >>>>'
+# puts '<<<< >>>>'
 
 # p 'When a Hash is iterated with my_each'
 # { "a": 2, "re": 7 }.my_each do |left, right|
 #   p left.to_s + ': ' + right.to_s
 # end
 
-# puts '<<< Testing my_each_with_index >>>>'
-test_arr = [3, 5, 9, 0, 4]
+# puts '<<<< Testing my_each_with_index >>>>'
+# test_arr = [3, 5, 9, 0, 4]
 # test_arr.my_each_with_index do |x, y|
 #   puts "#{y}: #{x}"
 # end
 
-puts '<<< Testing my_select >>>>'
-test_arr.my_select do |req|
-  p req.odd?
-end
+# puts '<<<< Testing my_select >>>>'
+# test_arr.my_select do |req|
+#   p req.odd?
+# end
+
+test_arr2 = [2, 4, 6, 8]
+
+puts '<<<< Testing my_all >>>>'
+p test_arr2.my_all { |elem| elem.even? }
+
