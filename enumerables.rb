@@ -25,6 +25,14 @@ module Enumerable
     end
     self
   end
+
+  def my_select
+    required = []
+    my_each do |r|
+      required.push(yield(r))
+    end
+    required
+  end
 end
 
 # p 'When an array is iterated with my_each'
@@ -46,8 +54,13 @@ end
 #   p left.to_s + ': ' + right.to_s
 # end
 
-puts '<<< Testing my_each_with_index >>>>'
-test_arr = [3, 5, 9, 0]
-test_arr.my_each_with_index do |x, y|
-  puts "#{y}: #{x}"
+# puts '<<< Testing my_each_with_index >>>>'
+test_arr = [3, 5, 9, 0, 4]
+# test_arr.my_each_with_index do |x, y|
+#   puts "#{y}: #{x}"
+# end
+
+puts '<<< Testing my_select >>>>'
+test_arr.my_select do |req|
+  p req.odd?
 end
