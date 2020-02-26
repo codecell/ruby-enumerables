@@ -37,9 +37,9 @@ module Enumerable
   def my_all
     track_negative = 0
     my_each do |t|
-      yield(t) == true ? true : track_negative += 1 
+      yield(t) == true ? true : track_negative += 1
     end
-    track_negative > 0 ? false : true
+    !track_negative.positive?
   end
 end
 
@@ -73,8 +73,10 @@ end
 #   p req.odd?
 # end
 
-test_arr2 = [2, 4, 6, 8]
+test_arr2 = [2, nil, 6, 8]
 
 puts '<<<< Testing my_all >>>>'
-p test_arr2.my_all { |elem| elem.even? }
-
+# p test_arr2.my_all { |elem| elem.class == Integer }
+test_arr2.my_all do |x|
+  p x.class == Integer
+end
