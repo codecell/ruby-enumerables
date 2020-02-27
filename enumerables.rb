@@ -57,6 +57,14 @@ module Enumerable
     end
     satisfies.positive? ? false : true
   end
+
+  def my_count
+    counter = 0
+    my_each do |el|
+      yield(el) ? counter += 1 : false
+    end
+    counter
+  end
 end
 
 # p 'When an array is iterated with my_each'
@@ -110,8 +118,16 @@ end
 #   p ds.length <= 2
 # end
 
-puts '<<<< Testing my_none >>>>'
+# puts '<<<< Testing my_none >>>>'
 # p %w[ant bear cat].my_none? { |word| word.length <= 2 }
-%w[ant bear ca].my_none? do |ds|
-  p ds.length <= 2
+# %w[ant bear ca].my_none? do |ds|
+#   p ds.length <= 2
+# end
+
+puts '<<<< Testing my_count >>>>'
+# p %w[ant bear ca].my_count { |el| el.length > 2 }
+%w[ant bear ca].my_count do |ds|
+  p ds.length >= 2
 end
+
+# p %w[ant bear ca].my_count('ca')
