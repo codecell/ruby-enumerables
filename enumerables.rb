@@ -65,6 +65,14 @@ module Enumerable
     end
     counter
   end
+
+  def my_map
+    cont_arr = []
+    my_each do |cont|
+      cont_arr.push(yield(cont)) if yield(cont)
+    end
+    cont_arr
+  end
 end
 
 # p 'When an array is iterated with my_each'
@@ -124,10 +132,13 @@ end
 #   p ds.length <= 2
 # end
 
-puts '<<<< Testing my_count >>>>'
-# p %w[ant bear ca].my_count { |el| el.length > 2 }
-%w[ant bear ca].my_count do |ds|
-  p ds.length >= 2
-end
+# puts '<<<< Testing my_count >>>>'
+# # p %w[ant bear ca].my_count { |el| el.length > 2 }
+# %w[ant bear ca].my_count do |ds|
+#   p ds.length >= 2
+# end
 
 # p %w[ant bear ca].my_count('ca')
+
+# puts '<<<< Testing my_map >>>>'
+# p [5, 7, 8, 9].my_map { |h| h * h }
