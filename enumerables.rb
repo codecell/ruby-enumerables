@@ -73,6 +73,32 @@ module Enumerable
     end
     cont_arr
   end
+
+  def my_inject(*argu)
+    counter = 0
+    block_nd_string_arg = (argu[0].is_a? String) && block_given?
+    memo = (argu.length == 1 && (block_nd_string_arg || !(argu[0].is_a? Symbol))) || argu.length == 2 ? argu[0] : nil
+
+    while counter < count
+      if !argu.empty? && ((argu[0].is_a? Symbol) || (argu[0].is_a? String))
+        my_each do |m|
+          memo = memo.nil? ? m : memo.send(argu[0], m)
+          counter += 1
+        end
+        memo
+      elsif argu.class.is_a? Range
+        memo += self[counter]
+        counter += 1
+        memo
+      else
+        my_each do |n|
+          memo = memo.nil? ? n : yield(memo, n)
+          counter += 1
+        end
+      end
+    end
+    memo
+  end
 end
 
 # p 'When an array is iterated with my_each'
@@ -142,3 +168,12 @@ end
 
 # puts '<<<< Testing my_map >>>>'
 # p [5, 7, 8, 9].my_map { |h| h * h }
+
+puts '<<<< Testing my_inject >>>>'
+p [5, 6, 7, 8].my_inject(:+)
+p [5, 6, 7, 8].my_inject(5, :+) { |sum, n| sum + n }
+p [5, 6, 7].my_inject(:*) { |sum, n| sum + n }
+p [5, 6, 7, 8].my_inject(1) { |sum, n| sum + n }
+rany = 1..3
+p rany.my_inject(:*)
+# memo always retains the initializer
