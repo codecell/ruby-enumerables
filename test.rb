@@ -41,13 +41,9 @@ end
   p word.length >= 3
 end
 
-# %w[ant bear cat].my_all? do |word|
-#   p word.length >= 4
-# end
-
-# p %w[ant bear cat].my_all?(/t/)                      #=> false
-# p [1, 2i, 3.14].my_all?(Numeric)                       #=> true
-# p [nil, true, 99].my_all?                              #=> false
+p %w[ant bear cat].my_all?(/t/) #=> false
+p [1, 2i, 3.14].my_all?(Numeric) #=> true
+p [nil, true, 99].my_all? #=> false
 p [].my_all?
 
 puts '<<<< Testing my_any >>>>'
@@ -63,9 +59,12 @@ puts '<<<< Testing my_none >>>>'
 end
 
 puts '<<<< Testing my_count >>>>'
-#  %w[ant bear ca].my_count { |el| el.length > 2 }
-%w[ant bear ca].my_count do |ds|
-  p ds.length >= 2
+%w[ant bear ca].my_count { |el| el.length > 2 }
+rangy_b = 1..8
+p rangy_b.my_count(3)
+p [3, 4, 3, 6, 'o'].my_count
+[5, 7, 8, 25].my_count do |d|
+  p d > 10
 end
 
 puts '<<<< Testing my_map >>>>'
@@ -77,6 +76,6 @@ p [5, 6, 7, 8].my_inject(:+)
 p [5, 6, 7, 8].my_inject(5, :+) { |sum, n| sum + n }
 p [5, 6, 7].my_inject(:*) { |sum, n| sum + n }
 p [5, 6, 7, 8].my_inject(1) { |sum, n| sum + n }
-# rany = 1..3
-# p rany.my_inject(:*)
+rany = 1..3
+p rany.my_inject(:*)
 # memo always retains the initializer
