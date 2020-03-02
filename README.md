@@ -1,6 +1,5 @@
 # ruby-enumerables
-
-In this project, we wrote two bubble sort algorithms. The first method sort an array of integers in ascending order. The second method sorts an array of strings in ascending order based on the length of the characters in each array item.
+This is a custom imlplementation of some ruby core Enumerables algorithms
 
 
 ## Built With
@@ -9,9 +8,9 @@ In this project, we wrote two bubble sort algorithms. The first method sort an a
 
 ## Installation and Testing Guidelines
   To get a local copy of this project, clone [this repo](https://github.com/codecell/ruby-enumerables)
-  - ***cd ruby-enumerables**
-  - In your Terminal, Run ***ruby test.rb***
-  - you can change the values in the arrays to your custom values and test again
+  - 'cd ruby-enumerables'
+  - In your Terminal, Run 'ruby test.rb'
+  - you can change the values in the arrays or range to your custom values and test again
 
 ## Author
 
