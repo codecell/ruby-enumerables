@@ -33,32 +33,40 @@ test_arr.my_select do |req|
 end
 
 puts '<<<< Testing my_all >>>>'
-p [nil, true, 99].my_all? { |elem| elem.is_a? Numeric }
+[nil, true, 99].my_all? do |d|
+  p d.is_a? Numeric
+end
 
-p %w[ant bear cat].my_all? { |word| word.length >= 3 } #=> true
-p %w[ant bear cat].my_all? { |word| word.length >= 4 } #=> false
+%w[ant bear cat].my_all? do |word|
+  p word.length >= 3
+end
+
+# %w[ant bear cat].my_all? do |word|
+#   p word.length >= 4
+# end
+
 # p %w[ant bear cat].my_all?(/t/)                      #=> false
 # p [1, 2i, 3.14].my_all?(Numeric)                       #=> true
 # p [nil, true, 99].my_all?                              #=> false
 p [].my_all?
 
 puts '<<<< Testing my_any >>>>'
-p %w[ant bear ca].my_any? { |word| word.length <= 2 }
+# p %w[ant bear ca].my_any? { |word| word.length <= 2 }
 %w[ant bear ca].my_any? do |ds|
   p ds.length <= 2
 end
 
 puts '<<<< Testing my_none >>>>'
-p %w[ant bear cat].my_none? { |word| word.length <= 2 }
+# p %w[ant bear cat].my_none? { |word| word.length <= 2 }
 %w[ant bear ca].my_none? do |ds|
   p ds.length <= 2
 end
 
 puts '<<<< Testing my_count >>>>'
-p %w[ant bear ca].my_count { |el| el.length > 2 }
-# %w[ant bear ca].my_count do |ds|
-#   p ds.length >= 2
-# end
+#  %w[ant bear ca].my_count { |el| el.length > 2 }
+%w[ant bear ca].my_count do |ds|
+  p ds.length >= 2
+end
 
 puts '<<<< Testing my_map >>>>'
 test_arr3 = [5, 7, 8, 9]
