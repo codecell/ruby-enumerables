@@ -9,8 +9,8 @@ In this project, we wrote two bubble sort algorithms. The first method sort an a
 
 ## Installation and Testing Guidelines
   To get a local copy of this project, clone [this repo](https://github.com/codecell/ruby-enumerables)
-  - __cd ruby-enumerables__
-  - In your Terminal, Run **ruby test.rb**
+  - ***cd ruby-enumerables**
+  - In your Terminal, Run ***ruby test.rb***
   - you can change the values in the arrays to your custom values and test again
 
 ## Author
