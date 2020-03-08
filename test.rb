@@ -48,6 +48,10 @@ p [].my_all?
 
 puts '<<<< Testing my_any >>>>'
 # p %w[ant bear ca].my_any? { |word| word.length <= 2 }
+p [1, '2', 3].my_any?(Integer) # true
+p %w[efe obi aji].my_any?(Integer) # false
+p %w[ant bat cat].my_any?(/g/) # false
+p [1, 2, '4'].my_any? # true
 %w[ant bear ca].my_any? do |ds|
   p ds.length <= 2
 end
