@@ -61,9 +61,14 @@ module Enumerable
           track_negative += yield(p) ? 0 : 1
           counter += 1
         end
-      elsif param[0].nil? && !block_given?
+      elsif !param[0].nil? && !block_given?
         my_each do |ds|
-          track_negative += ds ? 0 : 1
+          track_negative += ds == param[0] ? 0 : 1
+          counter += 1
+        end
+      else
+        my_each do |d|
+          track_negative += d ? 0 : 1
           counter += 1
         end
       end
@@ -83,9 +88,14 @@ module Enumerable
       elsif param[0].class == Regexp
         yes += self[counter].to_s.match(param[0]).nil? ? 0 : 1
         counter += 1
-      elsif block_given?
+      elsif block_given? && param[0].nil?
         my_each do |sth|
           yes += yield(sth) ? 1 : 0
+          counter += 1
+        end
+      elsif !param[0].nil? && !block_given?
+        my_each do |d|
+          yes += d == param[0] ? 1 : 0
           counter += 1
         end
       else
@@ -111,9 +121,14 @@ module Enumerable
       elsif param[0].class == Regexp
         satisfies += self[counter].to_s.match(param[0]).nil? ? 0 : 1
         counter += 1
-      elsif block_given?
+      elsif block_given? && param[0].nil?
         my_each do |s|
           satisfies += yield(s) ? 1 : 0
+          counter += 1
+        end
+      elsif !block_given? && !param[0].nil?
+        my_each do |t|
+          satisfies += t == param[0] ? 1 : 0
           counter += 1
         end
       else
@@ -143,7 +158,7 @@ module Enumerable
   end
 
   def my_map
-    return self unless block_given?
+    return to_enum(:my_map) unless block_given?
 
     cont_arr = []
 
@@ -154,8 +169,6 @@ module Enumerable
   end
 
   def my_inject(*argu)
-    return self unless block_given?
-
     counter = 0
     block_nd_string_arg = (argu[0].is_a? String) && block_given?
     memo = (argu.length == 1 && (block_nd_string_arg || !(argu[0].is_a? Symbol))) || argu.length == 2 ? argu[0] : nil
@@ -181,10 +194,3 @@ module Enumerable
     memo
   end
 end
-
-p [1, 2, 3].none?(Integer) # false
-p [1, 3, 3].my_none?(String) # true
-p %w[efe obi aji].my_none?(Integer) # true
-p %w[ant bat cat].my_none?(/b/) # false
-p [1, 2, '4'].my_none? # false
-# p ['2', '4', 'gress'].my_none? { |e| e.is_a? Integer }
