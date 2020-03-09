@@ -163,7 +163,7 @@ module Enumerable
     cont_arr = []
 
     my_each do |cont|
-      cont_arr.push(yield(cont)) if yield(cont)
+      cont_arr.push(yield(cont))
     end
     cont_arr
   end
@@ -180,11 +180,18 @@ module Enumerable
           counter += 1
         end
         memo
+      elsif !argu.empty? && (argu[0].is_a? Integer)
+        memo = argu[0]
+        my_each do |d|
+          memo = d ? memo.send(argu[1], d) : false
+          counter += 1
+        end
+        memo
       elsif argu.class.is_a? Range
         memo += self[counter]
         counter += 1
         memo
-      else
+      elsif block_given?
         my_each do |n|
           memo = memo.nil? ? n : yield(memo, n)
           counter += 1
