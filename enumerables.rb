@@ -180,7 +180,7 @@ module Enumerable
           counter += 1
         end
         memo
-      elsif !argu.empty? && (argu[0].is_a? Integer)
+      elsif !argu.empty? && (argu[0].is_a? Integer) && (argu.length == 2)
         memo = argu[0]
         my_each do |d|
           memo = d ? memo.send(argu[1], d) : false
