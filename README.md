@@ -1,3 +1,5 @@
+[![Run on Repl.it](https://repl.it/badge/github/codecell/ruby-enumerables)](https://repl.it/github/codecell/ruby-enumerables)
+
 # ruby-enumerables
 This is a custom imlplementation of some ruby core Enumerables algorithms
 

@@ -58,6 +58,11 @@ end
 
 puts '<<<< Testing my_none >>>>'
 # p %w[ant bear cat].my_none? { |word| word.length <= 2 }
+p [1, 2, 3].none?(Integer) # false
+p [1, 3, 3].my_none?(String) # true
+p %w[efe obi aji].my_none?(Integer) # true
+p %w[ant bat cat].my_none?(/b/) # false
+p [1, 2, '4'].my_none? # false
 %w[ant bear ca].my_none? do |ds|
   p ds.length <= 2
 end
