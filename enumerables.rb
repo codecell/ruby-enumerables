@@ -157,15 +157,19 @@ module Enumerable
     counter
   end
 
-  def my_map
-    return to_enum(:my_map) unless block_given?
-
-    cont_arr = []
-
-    my_each do |cont|
-      cont_arr.push(yield(cont))
+  def my_map(proc_map = nil)
+    array = []
+    if block_given? && proc_map.nil?
+      my_each { |i| array.push(yield(i)) }
+      array
+    elsif !proc_map.nil? && !block_given?
+      my_each do |i|
+        array.push(proc_map.call(i))
+      end
+      array
+    else
+      to_enum(:my_map)
     end
-    cont_arr
   end
 
   def my_inject(*argu)
