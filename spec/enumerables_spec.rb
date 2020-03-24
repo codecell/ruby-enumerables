@@ -15,7 +15,7 @@ RSpec.describe Enumerable do
       actual = test_hash.my_each
       expect(actual.to_h).to eq(test_hash)
     end
-    it 'Should return an array when numbers within the hash are looped over' do
+    it('Should return an array when numbers within the hash are looped over') do
       custom_hash = []
       test_hash.my_each do |hash|
         custom_hash << hash
@@ -112,6 +112,7 @@ RSpec.describe Enumerable do
       expect(custom_any).to eq(generic_any)
     end
   end
+
   describe('#my_none?') do
     it('Should return same value as the Generic Ruby any method when BLOCK_GIVEN') do
       custom_none = all_arr.my_none? { |s| s > 4 }
@@ -141,6 +142,7 @@ RSpec.describe Enumerable do
       expect(custom_none).to eq(generic_none)
     end
   end
+
   describe '#my_count' do
     it 'Should return number of items in an array' do
       custom_count = all_arr.my_count
@@ -151,6 +153,56 @@ RSpec.describe Enumerable do
       custom_count = all_arr.my_count(2)
       generic_count = all_arr.count(2)
       expect(custom_count).to eq(generic_count)
+    end
+  end
+
+  describe('#my_map') do
+    it('Should return the Array to_enum when NO BLOCK_GIVEN') do
+      actual = test_arr.my_map
+      expect(actual.to_a).to eq(test_arr)
+    end
+    it('Should return same value as the Generic Ruby map method when BLOCK_GIVEN') do
+      custom_map = all_arr.my_map { |s| s > 4 }
+      generic_map = all_arr.map { |t| t > 4 }
+      expect(custom_map).to eq(generic_map)
+    end
+  end
+  describe('my_inject') do
+    it('Should return same value as the Generic Ruby inject method when given a SUM symbol') do
+      custom_inject = all_arr.my_inject(:+)
+      generic_inject = all_arr.inject(:+)
+      expect(custom_inject).to eq(generic_inject)
+    end
+
+    it('Should return same value as the Generic Ruby inject method when given a MULTIPLICATION symbol') do
+      custom_inject = all_arr.my_inject(:*)
+      generic_inject = all_arr.inject(:*)
+      expect(custom_inject).to eq(generic_inject)
+    end
+
+    it('Should return same value as the Generic Ruby inject method when given a MODULUS symbol') do
+      custom_inject = all_arr.my_inject(:%)
+      generic_inject = all_arr.inject(:%)
+      expect(custom_inject).to eq(generic_inject)
+    end
+
+    it('Should return same value as the Generic Ruby inject method when BLOCK_GIVEN & with TWO PARAMETERS') do
+      custom_inject = all_arr.my_inject(5, :+) { |sum, n| sum + n }
+      generic_inject = all_arr.inject(5, :+) { |sum, n| sum + n }
+      expect(custom_inject).to eq(generic_inject)
+    end
+
+    it('Should return same value as the Generic Ruby inject method when BLOCK_GIVEN & with ONE PARAMETERS') do
+      custom_inject = all_arr.my_inject(1) { |sum, n| sum + n }
+      generic_inject = all_arr.inject(1) { |sum, n| sum + n }
+      expect(custom_inject).to eq(generic_inject)
+    end
+
+    let(:inject_range) { 1..9 }
+    it('Should return same value as the Generic Ruby inject method when tested with a Range') do
+      custom_inject = inject_range.my_inject(:+)
+      generic_inject = inject_range.inject(:+)
+      expect(custom_inject).to eq(generic_inject)
     end
   end
 end

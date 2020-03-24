@@ -9,7 +9,7 @@ module Enumerable
       if is_a? Range
         items.length >= 0 && yield(items[counter])
       elsif is_a? Hash
-        yield(items[counter][0], items[counter][1])
+        yield(items[counter])
       elsif !block_given?
         return self
       else
