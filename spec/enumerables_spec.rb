@@ -15,6 +15,17 @@ RSpec.describe Enumerable do
       actual = test_hash.my_each
       expect(actual.to_h).to eq(test_hash)
     end
+    it 'Should return an array when numbers within the hash are looped over' do
+      custom_hash = []
+      test_hash.my_each do |hash|
+        custom_hash << hash
+      end
+      generic_hash = []
+      test_hash.each do |hash|
+        generic_hash << hash
+      end
+      expect(custom_hash).to eq(generic_hash)
+    end
 
     let(:test_range) { 0..5 }
     it 'Should return same value when my_each and each are looped over the array' do
@@ -30,16 +41,15 @@ RSpec.describe Enumerable do
       expect(arr_one).to eq(arr_two)
     end
     it 'Should return an array when numbers within the range are looped over' do
-      arr_one = []
+      custom_range = []
       test_range.my_each do |range|
-        arr_one << range
+        custom_range << range
       end
-
-      arr_two = []
+      generic_range = []
       test_range.each do |range|
-        arr_two << range
+        generic_range << range
       end
-      expect(arr_one).to eq(arr_two)
+      expect(custom_range).to eq(generic_range)
     end
   end
   describe('#my_each_with_index') do
@@ -61,9 +71,9 @@ RSpec.describe Enumerable do
 
     let(:select_arr) { [2, 10, 6, 8, 4] }
     it('Should return same value as the Generic Ruby select method when BLOCK_GIVEN') do
-      custom_selects = select_arr.my_select { |s| s > 2 }
-      generic_selects = select_arr.select { |t| t > 2 }
-      expect(custom_selects).to eq(generic_selects)
+      custom_select = select_arr.my_select { |s| s > 2 }
+      generic_select = select_arr.select { |t| t > 2 }
+      expect(custom_select).to eq(generic_select)
     end
   end
   describe('#my_all?') do
@@ -129,6 +139,18 @@ RSpec.describe Enumerable do
       custom_none = none_values.my_none?
       generic_none = none_values.none?
       expect(custom_none).to eq(generic_none)
+    end
+  end
+  describe '#my_count' do
+    it 'Should return number of items in an array' do
+      custom_count = all_arr.my_count
+      generic_count = all_arr.count
+      expect(custom_count).to eq(generic_count)
+    end
+    it 'Should return number of items in an array in addition to the number given as PARAMETER' do
+      custom_count = all_arr.my_count(2)
+      generic_count = all_arr.count(2)
+      expect(custom_count).to eq(generic_count)
     end
   end
 end
