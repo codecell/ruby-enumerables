@@ -7,11 +7,15 @@ This is a custom imlplementation of some ruby core Enumerables algorithms
 ## Built With
 
 - Ruby
+- RSpec Testing framework
 
 ## Installation and Testing Guidelines
   To get a local copy of this project, clone [this repo](https://github.com/codecell/ruby-enumerables)
   - `cd ruby-enumerables`
-  - In your Terminal, Run `ruby test.rb`
+
+## Unit Tests
+  - Ensure all the project dependencies are installed
+  - In your Terminal, navigate to the project folder, Run `rspec`
   - you can change the values in the arrays or range to your custom values and test again
 
 ## Authors
