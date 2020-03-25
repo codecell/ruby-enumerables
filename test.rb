@@ -15,10 +15,10 @@ rangy1.my_each do |x|
   p x
 end
 
-hashy = { "a": 2, "re": 7 }
+hashy = { 1 => 2, 2 => 7 }
 p "When a Hash #{hashy} is iterated with my_each"
 hashy.my_each do |left, right|
-  p left.to_s + ': ' + right.to_s
+  p left => right
 end
 
 test_arr = [3, 5, 9, 0, 4]
@@ -83,8 +83,6 @@ p "#{test_arr3} using my_map multiplied by itself gives #{test_arr3.my_map { |h|
 puts '<<<< Testing my_inject >>>>'
 p [5, 6, 7, 8].my_inject(:+)
 p [5, 6, 7, 8].my_inject(5, :+) { |sum, n| sum + n }
-p [5, 6, 7].my_inject(:*) { |sum, n| sum + n }
 p [5, 6, 7, 8].my_inject(1) { |sum, n| sum + n }
 rany = 1..3
 p rany.my_inject(:*)
-# memo always retains the initializer
