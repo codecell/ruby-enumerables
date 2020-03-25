@@ -14,7 +14,7 @@ This is a custom imlplementation of some ruby core Enumerables algorithms
   - In your Terminal, Run `ruby test.rb`
   - you can change the values in the arrays or range to your custom values and test again
 
-## Author
+## Authors
 
 👤 **Alfred Ezaka**
 
@@ -22,6 +22,11 @@ This is a custom imlplementation of some ruby core Enumerables algorithms
 - Twitter: [@the_codecell](https://twitter.com/the_codecell) 
 - Linkedin: [ezaka alfred](https://www.linkedin.com/in/alfrednoble/)
 
+👤 **Martin Njoroge**
+
+- Github: [@kwizl](https://github.com/kwizl)
+- Twitter: [@NjoroKaris](https://twitter.com/NjoroKaris)
+- Linkedin: [martin njoroge](https://www.linkedin.com/in/martin-njoroge-098774110/)
 
 ## Show your support
 

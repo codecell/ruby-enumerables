@@ -112,7 +112,6 @@ RSpec.describe Enumerable do
       expect(custom_any).to eq(generic_any)
     end
   end
-
   describe('#my_none?') do
     it('Should return same value as the Generic Ruby any method when BLOCK_GIVEN') do
       custom_none = all_arr.my_none? { |s| s > 4 }
@@ -142,7 +141,6 @@ RSpec.describe Enumerable do
       expect(custom_none).to eq(generic_none)
     end
   end
-
   describe '#my_count' do
     it 'Should return number of items in an array' do
       custom_count = all_arr.my_count
@@ -155,16 +153,46 @@ RSpec.describe Enumerable do
       expect(custom_count).to eq(generic_count)
     end
   end
-
   describe('#my_map') do
     it('Should return the Array to_enum when NO BLOCK_GIVEN') do
       actual = test_arr.my_map
       expect(actual.to_a).to eq(test_arr)
     end
-    it('Should return same value as the Generic Ruby map method when BLOCK_GIVEN') do
-      custom_map = all_arr.my_map { |s| s > 4 }
-      generic_map = all_arr.map { |t| t > 4 }
+
+    it 'Should ADD 4 to each item in the array' do
+      custom_map = all_arr.my_map { |i| i + 4 }
+      generic_map = all_arr.map { |i| i + 4 }
       expect(custom_map).to eq(generic_map)
+    end
+
+    it 'Should MULTIPLY by 4 each item in the array' do
+      custom_map = all_arr.my_map { |i| i * 4 }
+      generic_map = all_arr.map { |i| i * 4 }
+      expect(custom_map).to eq(generic_map)
+    end
+    let(:test_divide) { [2, 4, 6, 8, 10] }
+    it 'Should DIVIDE by 2 each item in the array' do
+      custom_map = all_arr.my_map { |i| i / 2 }
+      generic_map = all_arr.map { |i| i / 2 }
+      expect(custom_map).to eq(generic_map)
+    end
+
+    it 'Should be able to use PROC MULTIPLICTION in ARGUMENT' do
+      proc_map = proc { |i| i * 2 }
+      custom_map = all_arr.my_map(proc_map)
+      expect(custom_map).to eq([4, 20, 12, 16, 8])
+    end
+
+    it 'Should be able to use PROC ADDITION in ARGUMENT' do
+      proc_map = proc { |i| i + 2 }
+      custom_map = all_arr.my_map(proc_map)
+      expect(custom_map).to eq([4, 12, 8, 10, 6])
+    end
+
+    it 'Should be able to use PROC DIVISION in ARGUMENT' do
+      proc_map = proc { |i| i / 2 }
+      custom_map = all_arr.my_map(proc_map)
+      expect(custom_map).to eq([1, 5, 3, 4, 2])
     end
   end
   describe('my_inject') do
