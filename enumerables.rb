@@ -159,6 +159,14 @@ module Enumerable
 
   def my_map
     return to_enum(:my_map) unless block_given?
+    # if (para[0].class == Proc)
+    #   map_proc = Proc.new { |cont| yield(cont) }
+    #   cont_arr.call(&map_proc)
+    # else
+    #   my_each do |cont|
+    #     cont_arr.push(yield(cont))
+    #   end
+    # end
 
     cont_arr = []
 

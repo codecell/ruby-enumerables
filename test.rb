@@ -86,3 +86,5 @@ p [5, 6, 7, 8].my_inject(5, :+) { |sum, n| sum + n }
 p [5, 6, 7, 8].my_inject(1) { |sum, n| sum + n }
 rany = 1..3
 p rany.my_inject(:*)
+
+puts '<<<< Testing my_inject >>>>'
